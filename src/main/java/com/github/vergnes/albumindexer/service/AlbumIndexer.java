@@ -1,7 +1,7 @@
 package com.github.vergnes.albumindexer.service;
 
-import com.github.vergnes.albumindexer.AlbumRepository;
 import com.github.vergnes.albumindexer.domain.Album;
+import com.github.vergnes.albumindexer.repository.AlbumRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
