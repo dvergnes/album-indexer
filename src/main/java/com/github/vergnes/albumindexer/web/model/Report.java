@@ -1,7 +1,9 @@
 package com.github.vergnes.albumindexer.web.model;
 
+import org.elasticsearch.search.aggregations.bucket.MultiBucketsAggregation;
 import org.elasticsearch.search.aggregations.bucket.histogram.DateHistogram;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -13,32 +15,40 @@ import static java.util.stream.Collectors.toList;
  */
 public class Report {
     private final long totalCount;
-    private List<Bucket> buckets = new ArrayList<>();
+    private List<Bucket> albumsOverTime = new ArrayList<>();
+    private List<Bucket> albumsByGenre = new ArrayList<>();
 
-    public Report(long totalCount, Collection<? extends DateHistogram.Bucket> buckets) {
+    public Report(long totalCount, Collection<? extends DateHistogram.Bucket> albumsOverTime,
+                  Collection<? extends MultiBucketsAggregation.Bucket> albumsByGenre) {
         this.totalCount = totalCount;
-        this.buckets = buckets.stream().map(b -> new Bucket(b.getKeyAsNumber().longValue(),
+        this.albumsOverTime = albumsOverTime.stream().map(b -> new Bucket<Long>(b.getKeyAsNumber().longValue(),
+                b.getDocCount())).collect(toList());
+        this.albumsByGenre = albumsByGenre.stream().map(b -> new Bucket<String>(b.getKey(),
                 b.getDocCount())).collect(toList());
     }
 
-    public List<Bucket> getBuckets() {
-        return buckets;
+    public List<Bucket> getAlbumsByGenre() {
+        return albumsByGenre;
+    }
+
+    public List<Bucket> getAlbumsOverTime() {
+        return albumsOverTime;
     }
 
     public long getTotalCount() {
         return totalCount;
     }
 
-    public static class Bucket {
-        private long key;
+    public static class Bucket<KEY extends Serializable> {
+        private KEY key;
         private long count;
 
-        public Bucket(long key, long count) {
+        public Bucket(KEY key, long count) {
             this.key = key;
             this.count = count;
         }
 
-        public long getKey() {
+        public KEY getKey() {
             return key;
         }
 

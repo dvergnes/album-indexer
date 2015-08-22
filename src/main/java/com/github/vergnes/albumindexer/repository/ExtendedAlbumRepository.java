@@ -10,4 +10,6 @@ import java.util.Collection;
 public interface ExtendedAlbumRepository {
 
     Collection<? extends DateHistogram.Bucket> aggregateAlbumsOverTime();
+
+    Collection<? extends org.elasticsearch.search.aggregations.bucket.MultiBucketsAggregation.Bucket> aggregateAlbumsByGenre();
 }
