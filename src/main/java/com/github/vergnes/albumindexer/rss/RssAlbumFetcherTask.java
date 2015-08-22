@@ -38,6 +38,8 @@ public class RssAlbumFetcherTask {
         LOGGER.info("Fetching rss feed for new albums");
         try {
             SyndFeed syndFeed = feedFetcher.retrieveFeed(url);
+            LOGGER.debug("Feed last update: {} contains {} entries", syndFeed.getPublishedDate(), 
+                    syndFeed.getEntries().size());
             syndFeed.getEntries().stream()
                     .map(rssAlbumParser::parse)
                     .filter(Optional::isPresent)
