@@ -33,7 +33,7 @@ public class RssAlbumFetcherTask {
     @Inject
     private Consumer<? super Album> consumer;
 
-    @Scheduled(fixedRate = 5000)
+    @Scheduled(fixedRateString = "${rss.update.frequencyinms}")
     public void fetchAlbums() {
         LOGGER.info("Fetching rss feed for new albums");
         try {

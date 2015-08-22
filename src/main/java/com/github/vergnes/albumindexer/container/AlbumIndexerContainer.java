@@ -4,6 +4,7 @@ import com.rometools.fetcher.FeedFetcher;
 import com.rometools.fetcher.impl.FeedFetcherCache;
 import com.rometools.fetcher.impl.HashMapFeedInfoCache;
 import com.rometools.fetcher.impl.HttpClientFeedFetcher;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -16,6 +17,9 @@ import java.net.URL;
 @Configuration
 public class AlbumIndexerContainer {
 
+    @Value("${rss.url}")
+    private URL feedUrl;
+
     @Bean
     public FeedFetcher feedFetcher() {
         FeedFetcherCache feedInfoCache = HashMapFeedInfoCache.getInstance();
@@ -24,7 +28,6 @@ public class AlbumIndexerContainer {
 
     @Bean
     public URL rssFeedUrl() throws MalformedURLException {
-        // FIXME: should be in configuration
-        return new URL("http://newalbumreleases.net/feed/");
+        return feedUrl;
     }
 }
