@@ -31,6 +31,7 @@ public class RssAlbumParser {
 
     public Optional<Album> parse(SyndEntry entry) {
         Album.AlbumBuilder builder = extractAlbumInfo(entry.getDescription());
+        builder.withId(entry.getUri());
         builder.withReleaseDate(entry.getPublishedDate());
         return builder.build();
     }
