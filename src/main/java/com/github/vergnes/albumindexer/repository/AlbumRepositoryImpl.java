@@ -19,7 +19,7 @@ import static org.elasticsearch.index.query.QueryBuilders.matchAllQuery;
  * Created by denis.vergnes on 22/08/2015.
  */
 @Component
-public class AlbumRepositoryImpl implements ExtendedAlbumRepository {
+public class AlbumRepositoryImpl implements ElasticSearchAlbumRepository {
     public static final String ALBUMS_OVER_TIME = "albums-over-time";
     private static final String ALBUMS_BY_GENRE = "albums-by-genre";
     @Inject

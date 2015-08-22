@@ -7,7 +7,7 @@ import java.util.Collection;
 /**
  * Created by denis.vergnes on 22/08/2015.
  */
-public interface ExtendedAlbumRepository {
+public interface ElasticSearchAlbumRepository {
 
     Collection<? extends DateHistogram.Bucket> aggregateAlbumsOverTime();
 

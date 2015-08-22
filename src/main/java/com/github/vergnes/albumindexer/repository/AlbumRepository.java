@@ -6,5 +6,5 @@ import org.springframework.data.elasticsearch.repository.ElasticsearchCrudReposi
 /**
  * Created by denis.vergnes on 22/08/2015.
  */
-public interface AlbumRepository extends ElasticsearchCrudRepository<Album, String>, ExtendedAlbumRepository {
+public interface AlbumRepository extends ElasticsearchCrudRepository<Album, String>, ElasticSearchAlbumRepository {
 }
