@@ -41,9 +41,6 @@ public class Album {
             store = true
     )
     private String genre;
-    private double price;
-    private String encodingFormat;
-    private double encodingRate;
     @Field(
             type = FieldType.Date,
             index = FieldIndex.not_analyzed,
@@ -76,27 +73,12 @@ public class Album {
         return genre;
     }
 
-    public double getPrice() {
-        return price;
-    }
-
-    public String getEncodingFormat() {
-        return encodingFormat;
-    }
-
-    public double getEncodingRate() {
-        return encodingRate;
-    }
-
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .append("title", title)
                 .append("artist", artist)
                 .append("genre", genre)
-                .append("price", price)
-                .append("encodingFormat", encodingFormat)
-                .append("encodingRate", encodingRate)
                 .append("releaseDate", releaseDate)
                 .toString();
     }
@@ -122,21 +104,6 @@ public class Album {
 
         public AlbumBuilder withGenre(String genre) {
             subject.genre = genre;
-            return this;
-        }
-
-        public AlbumBuilder withPrice(double price) {
-            subject.price = price;
-            return this;
-        }
-
-        public AlbumBuilder withEncodingFormat(String encodingFormat) {
-            subject.encodingFormat = encodingFormat;
-            return this;
-        }
-
-        public AlbumBuilder withEncodingRate(double encodingRate) {
-            subject.encodingRate = encodingRate;
             return this;
         }
 
