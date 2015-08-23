@@ -4,6 +4,7 @@ import com.rometools.fetcher.FeedFetcher;
 import com.rometools.fetcher.impl.FeedFetcherCache;
 import com.rometools.fetcher.impl.HashMapFeedInfoCache;
 import com.rometools.fetcher.impl.HttpClientFeedFetcher;
+import org.apache.catalina.filters.CorsFilter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,6 +25,11 @@ public class AlbumIndexerContainer {
     public FeedFetcher feedFetcher() {
         FeedFetcherCache feedInfoCache = HashMapFeedInfoCache.getInstance();
         return new HttpClientFeedFetcher(feedInfoCache);
+    }
+
+    @Bean
+    public CorsFilter corsFilter() {
+        return new CorsFilter();
     }
 
     @Bean
