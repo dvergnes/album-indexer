@@ -16,14 +16,19 @@
 </header>
 
 <section class="content">
-    <div class="total-count-wrapper content-wrapper">
-        <span class="total-count"></span>
-    </div>
-    <div class="albums-genre-wrapper content-wrapper">
-        <div class="albums-genre"></div>
-    </div>
-    <div class="albums-overtime-wrapper content-wrapper">
-        <div class="albums-overtime"></div>
+    <fieldset class="total-count-wrapper content-wrapper">
+        <legend>Total numbers of albums</legend>
+        <div class="total-count"></div>
+    </fieldset>
+    <div class="chart-container">
+        <fieldset class="albums-genre-wrapper content-wrapper">
+            <legend>Repartition of albums by genre</legend>
+            <div class="albums-genre"></div>
+        </fieldset>
+        <fieldset class="albums-overtime-wrapper content-wrapper">
+            <legend>Numbers of albums over time</legend>
+            <div class="albums-overtime"></div>
+        </fieldset>
     </div>
 </section>
 

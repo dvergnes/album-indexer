@@ -1,10 +1,40 @@
 header {
 
   h1 {
-    font-size: 3em;
+    font-size: 5em;
     text-align: center;
 
   }
 
+}
+
+.content {
+  .content-wrapper {
+    display: inline-block;
+    border: 1px solid #ccc;
+    margin: 1%;
+    box-sizing: border-box;
+    width: 48%;
+
+    legend {
+      padding: 0 10px;
+    }
+  }
+
+  .total-count-wrapper {
+    display: block;
+    width: initial;
+  }
+
+  .total-count {
+    font-size: 4em;
+    text-align: center;
+
+  }
+
+  .chart-container {
+    white-space: nowrap;
+
+  }
 }
 

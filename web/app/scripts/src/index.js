@@ -10,7 +10,12 @@ var moment = require('moment');
     var config = {
         dataSource: 'http://localhost:8080/api/report',
         colors: ['#3366CC', '#DC3912', '#FF9900', '#109618', '#990099', '#FF3300', '#CC6633', '#1293CD', '#0099FF', '#186901'],
-        dateFormat: 'YYYY-MM-DD'
+        dateFormat: 'YYYY-MM-DD',
+        refreshDelay: 60 * 1000,
+        chartDimension: {
+            w: (global.innerWidth - 100) / 2,
+            h: 500
+        }
     };
     var log = global.console;
 
@@ -34,8 +39,8 @@ var moment = require('moment');
 
     function GenreController(el) {
 
-        var width = 960,
-            height = 500,
+        var width = config.chartDimension.w,
+            height = config.chartDimension.h,
             radius = Math.min(width, height) / 2;
 
         var color = d3.scale.ordinal()
@@ -57,6 +62,16 @@ var moment = require('moment');
             .append('g')
             .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
 
+        function addLabel(g, textGenerator, positionGenerator) {
+            g.append('text')
+                .attr('transform', function (d) {
+                    return 'translate(' + positionGenerator(d) + ')';
+                })
+                .attr('dy', '.35em')
+                .style('text-anchor', 'middle')
+                .text(textGenerator);
+        }
+
         function _update(report) {
             var data = report.albumsByGenre;
             data.forEach(function (d) {
@@ -74,15 +89,15 @@ var moment = require('moment');
                     return color(d.data.key);
                 });
 
-            g.append('text')
-                .attr('transform', function (d) {
-                    return 'translate(' + arc.centroid(d) + ')';
-                })
-                .attr('dy', '.35em')
-                .style('text-anchor', 'middle')
-                .text(function (d) {
-                    return d.data.key + ' ' + formatPercent(d.data.count, report.totalCount);
-                });
+            addLabel(g, function (d) {
+                return d.data.key;
+            }, arc.centroid);
+            addLabel(g, function (d) {
+                return formatPercent(d.data.count, report.totalCount);
+            }, function (d) {
+                var pos = arc.centroid(d);
+                return [pos[0], pos[1] + 20];
+            });
         }
 
         return {update: _update};
@@ -95,8 +110,8 @@ var moment = require('moment');
 
 
         var margin = {top: 20, right: 20, bottom: 30, left: 40},
-            width = 960 - margin.left - margin.right,
-            height = 500 - margin.top - margin.bottom;
+            width = config.chartDimension.w - margin.left - margin.right,
+            height = config.chartDimension.h - margin.top - margin.bottom;
 
         var x = d3.scale.ordinal()
             .rangeRoundBands([0, width], .1);
@@ -181,5 +196,6 @@ var moment = require('moment');
     }
 
     fetchAndUpdate();
+
 
 })(window);
