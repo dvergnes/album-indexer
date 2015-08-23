@@ -110,7 +110,8 @@ public class Album {
         private Album subject = new Album();
 
         private static boolean isValid(Album album) {
-            return StringUtils.isNotBlank(album.artist)
+            return StringUtils.isNotBlank(album.id)
+                    && StringUtils.isNotBlank(album.artist)
                     && StringUtils.isNotBlank(album.title)
                     && StringUtils.isNotBlank(album.genre);
         }

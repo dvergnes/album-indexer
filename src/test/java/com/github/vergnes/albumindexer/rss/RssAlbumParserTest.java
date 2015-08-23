@@ -39,6 +39,7 @@ public class RssAlbumParserTest {
     @Test
     public void should_parse_album_with_line_breaks() throws Exception {
         SyndEntry entry = mock(SyndEntry.class);
+        when(entry.getUri()).thenReturn("uri");
         SyndContent content = mock(SyndContent.class);
         when(content.getValue()).thenReturn("<p align=\"center\"></p>\n" +
                 "<p align=\"center\">\n" +
@@ -72,6 +73,7 @@ public class RssAlbumParserTest {
     @Test
     public void should_not_parse_album_because_invalid_description() throws Exception {
         SyndEntry entry = mock(SyndEntry.class);
+        when(entry.getUri()).thenReturn("uri");
         SyndContent content = mock(SyndContent.class);
         when(content.getValue()).thenReturn("<p align=\"center\"></p> good luck to parse this");
         when(entry.getDescription()).thenReturn(content);
