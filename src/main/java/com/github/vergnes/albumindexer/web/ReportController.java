@@ -12,6 +12,7 @@ import javax.inject.Inject;
  * Created by denis.vergnes on 22/08/2015.
  */
 @RestController
+@RequestMapping("/api")
 public class ReportController {
 
     @Inject
@@ -19,6 +20,7 @@ public class ReportController {
 
     @RequestMapping(value = "/report", method = RequestMethod.GET)
     public Report report() {
-        return new Report(repository.count(), repository.aggregateAlbumsOverTime(),repository.aggregateAlbumsByGenre());
+        return new Report(repository.count(), repository.aggregateAlbumsOverTime(), 
+                repository.aggregateAlbumsByGenre());
     }
 }
